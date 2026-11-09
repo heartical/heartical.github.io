@@ -1,171 +1,222 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f7f3">
-  <title>A website is coming soon…</title>
-  <style>
-    :root { color-scheme: light; background: #f8f7f3; color: #20241f; }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
-    main {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(18px, 3vh, 32px);
-      padding: 40px 24px 64px;
-      overflow: hidden;
-      position: relative;
-      isolation: isolate;
-    }
-    main::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      background-image: radial-gradient(#b4bbb0 0.7px, transparent 0.7px);
-      background-size: 24px 24px;
-      opacity: .38;
-      mask-image: radial-gradient(ellipse 45% 48% at 50% 45%, #000 0%, transparent 100%);
-    }
-    .scene { width: min(100%, 540px); height: auto; overflow: visible; flex-shrink: 0; }
-    h1 {
-      width: min(100%, 580px);
-      margin: 0;
-      line-height: 0;
-      position: relative;
-    }
-    .headline-art { display: block; width: 100%; height: auto; overflow: visible; }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-    .unicorn { transform-origin: 270px 325px; animation: wiggle 4s ease-in-out infinite; }
-    .tail { transform-origin: 330px 267px; animation: swish 3s ease-in-out infinite; }
-    .sparkle { transform-box: fill-box; transform-origin: center; animation: twinkle 3s ease-in-out infinite; }
-    .sparkle:nth-of-type(2) { animation-delay: -1.5s; }
-    @keyframes wiggle { 0%, 100% { transform: rotate(-2deg) translateY(0); } 50% { transform: rotate(2deg) translateY(-5px); } }
-    @keyframes swish { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(7deg); } }
-    @keyframes twinkle { 0%, 100% { transform: scale(.8) rotate(-8deg); } 50% { transform: scale(1.1) rotate(8deg); } }
-    @media (max-width: 480px) {
-      main { padding: 32px 20px 56px; gap: 16px; }
-      .scene { width: min(112%, 430px); max-width: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .unicorn, .tail, .sparkle { animation: none; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mikhail Grafov</title>
+<meta name="description" content="Mikhail Grafov — infrastructure and security engineer, founder of Traiecto, a resilience control plane for multi-cluster critical infrastructure. Based in Belgrade, Serbia.">
+<meta name="author" content="Mikhail Grafov">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://grafov.me/">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://grafov.me/">
+<meta property="og:title" content="Mikhail Grafov · Founder of Traiecto">
+<meta property="og:description" content="Infrastructure and security engineer. Building Traiecto, a resilience control plane that keeps rollouts, failover and recovery correct across clusters when infrastructure state is stale.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --text:#1a2433; --muted:#4f5a6b; --heading:#0f1b2d;
+  --accent:#e8772e; --accent-text:#a84c12; --line:#e1ddd3; --code-bg:#ece9e1;
+  --hero-bg:#0f1b2d; --hero-text:#f6f5f1; --hero-muted:#b4bdcb;
+  --font-head:"Space Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1b2d; --surface:#16243a; --text:#dfe4ec; --muted:#a9b3c2; --heading:#f6f5f1;
+    --accent-text:#f0924f; --line:#26354d; --code-bg:#1d2d46;
+    --hero-bg:#0a1422; --hero-text:#f6f5f1; --hero-muted:#a9b3c2;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1b2d; --surface:#16243a; --text:#dfe4ec; --muted:#a9b3c2; --heading:#f6f5f1;
+  --accent-text:#f0924f; --line:#26354d; --code-bg:#1d2d46;
+  --hero-bg:#0a1422; --hero-text:#f6f5f1; --hero-muted:#a9b3c2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:1rem;line-height:1.6;overflow-wrap:break-word}
+a{color:var(--accent-text);text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+h1,h2,h3{font-family:var(--font-head);color:var(--heading);line-height:1.2;margin:0}
+.wrap{max-width:52rem;margin:0 auto;padding:0 16px}
+@media (min-width:640px){.wrap{padding:0 32px}}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:16px;top:16px;background:var(--surface);padding:8px 12px;z-index:10}
+
+/* Hero */
+header.hero{background:var(--hero-bg);color:var(--hero-text);padding:56px 0 48px;border-bottom:4px solid var(--accent)}
+.hero h1{color:var(--hero-text);font-size:clamp(2.2rem,7vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+.hero .title{font-family:var(--font-head);color:var(--accent);font-weight:600;font-size:clamp(1.05rem,3.2vw,1.3rem);margin:.5rem 0 1.25rem}
+.hero .summary{color:var(--hero-text);font-size:1.075rem;max-width:40rem;margin:0 0 1.5rem;opacity:.95}
+.hero .loc{color:var(--hero-muted);font-size:.95rem;margin:0 0 1.5rem}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:.6rem 1.1rem;border-radius:6px;font-weight:600;text-decoration:none;font-size:.95rem}
+.btn-primary{background:var(--accent);color:#0f1b2d}
+.btn-primary:hover{background:#f0924f}
+.btn-ghost{color:var(--hero-text);border:1px solid #3a4a63}
+.btn-ghost:hover{border-color:var(--accent)}
+.hero a:focus-visible{outline-color:var(--hero-text)}
+
+/* Sections */
+main section{padding:48px 0;border-bottom:1px solid var(--line)}
+main section:last-child{border-bottom:0}
+h2{font-size:1.6rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.01em}
+h2::before{content:"";display:block;width:36px;height:3px;background:var(--accent);margin-bottom:.75rem}
+h3{font-size:1.1rem;font-weight:600;margin:1.75rem 0 .6rem}
+p{margin:0 0 1rem}
+.lead{font-size:1.1rem;color:var(--heading)}
+.muted{color:var(--muted)}
+ul{margin:0 0 1rem;padding-left:1.2rem}
+li{margin:.3rem 0}
+
+.mech{list-style:none;padding:0;display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:640px){.mech{grid-template-columns:1fr 1fr}}
+.mech li{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:14px 16px;margin:0}
+.mech strong{display:block;font-family:var(--font-head);color:var(--heading);margin-bottom:.25rem}
+.mech span{color:var(--muted);font-size:.95rem}
+
+.facts{list-style:none;padding:0;margin:0 0 1rem}
+.facts li{padding:.55rem 0;border-bottom:1px dashed var(--line);margin:0}
+.facts li:last-child{border-bottom:0}
+.num{font-family:var(--font-head);font-weight:700;color:var(--heading)}
+
+.note{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;font-size:.95rem;color:var(--muted)}
+.note strong{color:var(--heading)}
+
+/* Timeline */
+.timeline{list-style:none;padding:0;margin:0}
+.timeline li{display:grid;grid-template-columns:1fr;gap:2px;padding:14px 0;border-bottom:1px solid var(--line);margin:0}
+.timeline li:last-child{border-bottom:0}
+@media (min-width:640px){.timeline li{grid-template-columns:7.5rem 1fr;gap:16px}}
+.when{font-family:var(--font-head);font-weight:600;color:var(--accent-text);font-variant-numeric:tabular-nums}
+.role{font-weight:600;color:var(--heading)}
+.org{color:var(--muted)}
+.desc{margin:.15rem 0 0;font-size:.95rem}
+
+.cite{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px}
+.cite p:last-child{margin-bottom:0}
+
+.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.tags li{background:var(--code-bg);color:var(--heading);border-radius:999px;padding:.35rem .8rem;font-size:.92rem;margin:0}
+
+footer{background:var(--hero-bg);color:var(--hero-muted);padding:36px 0;font-size:.95rem}
+footer h2{color:var(--hero-text);font-size:1.25rem}
+footer a{color:var(--accent)}
+footer p{margin:.25rem 0}
+footer .copy{margin-top:1.25rem;font-size:.85rem}
+</style>
 </head>
 <body>
-  <main>
-    <svg class="scene" viewBox="0 0 540 390" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <circle cx="270" cy="198" r="147" fill="#eeebfa"/>
-      <circle cx="270" cy="198" r="164" stroke="#dcd6ed" stroke-dasharray="2 10" stroke-linecap="round"/>
-      <ellipse cx="272" cy="349" rx="111" ry="12" fill="#dcd8eb" opacity=".55"/>
-      <g stroke="#343451" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <g class="sparkle">
-          <path d="M112 128c3 15 7 19 21 22-14 4-18 8-21 23-4-15-8-19-22-23 14-3 18-7 22-22Z" fill="#ffe28a" stroke="#ccae55" stroke-width="2"/>
-        </g>
-        <g class="sparkle">
-          <path d="M421 80c3 12 6 15 17 18-11 3-14 6-17 18-3-12-6-15-17-18 11-3 14-6 17-18Z" fill="#ffafc8" stroke="#d785a5" stroke-width="2"/>
-        </g>
-        <path d="M105 273v12m-6-6h12M432 285v10m-5-5h10" stroke="#b0a5cf" stroke-width="2"/>
-        <circle cx="157" cy="72" r="4" fill="#a5b9f7" stroke="none"/>
-        <circle cx="443" cy="203" r="4" fill="#a5b9f7" stroke="none"/>
-        <g class="unicorn">
-          <g class="tail">
-            <path d="M331 260c18-40 54-23 62-55 14 29 2 42-8 56 12 4 25 0 35-9-5 39-46 59-80 35Z" fill="#a99af3"/>
-            <path d="M337 267c28-39 47-13 56-62" stroke="#ffc0d6" stroke-width="12"/>
-            <path d="M344 281c29-10 49 4 68-18" stroke="#8fd5d2" stroke-width="10"/>
-          </g>
-          <path d="M230 224c-33 14-45 64-22 94 21 29 104 37 132-1 21-30 1-79-28-94Z" fill="#fffdfb"/>
-          <path d="M245 242c-23 15-29 48-13 67 17 19 62 24 83 0 18-20 9-50-12-64" fill="#f0edf9" stroke="none"/>
-          <path d="M232 269c-17-5-24 9-16 24l15 23c6 9 20 2 16-9l-6-20" fill="#fffdfb"/>
-          <path d="m224 306 7 10c6 9 20 2 16-9l-3-8Z" fill="#9eabed"/>
-          <path d="M309 270c18-5 24 9 16 24l-15 23c-6 9-20 2-16-9l6-20" fill="#fffdfb"/>
-          <path d="m317 307-7 10c-6 9-20 2-16-9l3-8Z" fill="#9eabed"/>
-          <g transform="rotate(-17 216 326)">
-            <rect x="193" y="305" width="43" height="43" rx="18" fill="#fffdfb"/>
-            <path d="M193 328h43v3c0 11-8 17-18 17h-7c-10 0-18-6-18-17Z" fill="#899be8"/>
-            <path d="M215 334v9" stroke="#6376c9" stroke-width="2"/>
-          </g>
-          <g transform="rotate(17 323 326)">
-            <rect x="301" y="305" width="43" height="43" rx="18" fill="#fffdfb"/>
-            <path d="M301 328h43v3c0 11-8 17-18 17h-7c-10 0-18-6-18-17Z" fill="#899be8"/>
-            <path d="M323 334v9" stroke="#6376c9" stroke-width="2"/>
-          </g>
-          <path d="M235 116c-50-12-68 23-53 45-22 12-22 40-5 53-10 20 1 46 28 41-6-13 1-21 13-32l25-72Z" fill="#a99af3"/>
-          <path d="M216 128c-33 2-38 26-19 39-26 7-27 37-9 47-7 13-2 25 10 28" stroke="#ffbad3" stroke-width="12"/>
-          <path d="M225 139c-23 8-24 24-13 37-22 11-23 24-16 37" stroke="#93d9d0" stroke-width="10"/>
-          <path d="M209 133c-14-19-18-47-10-61 23 3 40 27 43 51" fill="#fffdfb"/>
-          <path d="M212 119c-7-11-10-23-9-32 12 7 19 18 22 31" fill="#ffbcd2" stroke="none"/>
-          <path d="M299 119c1-27 14-48 36-55 12 21 7 49-8 70" fill="#fffdfb"/>
-          <path d="M312 116c3-15 9-27 18-34 3 14-1 27-8 38" fill="#ffbcd2" stroke="none"/>
-          <path d="m255 115 27-76c1-4 6-3 6 1l7 80Z" fill="#ffe28a"/>
-          <path d="m272 68 18 8m-24 9 26 11m-32 7 33 12" stroke="#d8ab52" stroke-width="2.5"/>
-          <path d="M203 151c4-31 30-49 66-48 43 0 73 23 73 60l-3 38c-2 35-35 57-70 55-39-1-70-23-70-56Z" fill="#fffdfb"/>
-          <path d="M238 112c10-16 36-19 55-9 14 6 18 19 18 31-12-5-19-10-26-18 1 13-8 22-18 24 1-13-5-17-11-20-4 10-14 15-26 13 7-7 10-14 8-21Z" fill="#a99af3"/>
-          <path d="M248 109c11-8 26-9 38-3" stroke="#ffd2e1" stroke-width="7"/>
-          <path d="m218 146 13-6m70-2 15 6" stroke-width="3.5"/>
-          <ellipse cx="235" cy="171" rx="19" ry="23" fill="white"/>
-          <ellipse cx="301" cy="166" rx="20" ry="24" fill="white"/>
-          <ellipse cx="244" cy="176" rx="7" ry="10" fill="#343451" stroke="none"/>
-          <ellipse cx="291" cy="172" rx="7" ry="10" fill="#343451" stroke="none"/>
-          <circle cx="246" cy="172" r="2.4" fill="white" stroke="none"/>
-          <circle cx="293" cy="168" r="2.4" fill="white" stroke="none"/>
-          <ellipse cx="216" cy="201" rx="12" ry="7" fill="#f9b8cb" stroke="none"/>
-          <ellipse cx="322" cy="196" rx="12" ry="7" fill="#f9b8cb" stroke="none"/>
-          <path d="M228 193c13-13 65-13 82-1 12 8 12 29 0 41-17 17-62 18-80 3-14-12-15-31-2-43Z" fill="#ffe3eb"/>
-          <ellipse cx="244" cy="205" rx="3.7" ry="5" transform="rotate(-23 244 205)" fill="#ae7e96" stroke="none"/>
-          <ellipse cx="296" cy="203" rx="3.7" ry="5" transform="rotate(20 296 203)" fill="#ae7e96" stroke="none"/>
-          <path d="M252 220Q269 227 288 218C287 232 280 240 270 240C261 240 255 232 252 220Z" fill="#343451" stroke-width="2.5"/>
-          <path d="M265 237c3-8 11-10 18-5-4 6-10 9-18 5Z" fill="#f18daf" stroke="none"/>
-          <path d="m260 223 1 7q5 3 10 0l1-6" fill="#fffdfb" stroke="none"/>
-          <path d="m248 217 5 4m35-5 4 2" stroke-width="2.5"/>
-        </g>
-        <path d="m365 122 9-8m-2 24 12-2" stroke="#a99af3" stroke-width="2.5"/>
-      </g>
-    </svg>
-    <h1>
-      <span class="sr-only">A website is coming soon…</span>
-      <svg class="headline-art" viewBox="0 0 580 162" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-        <g transform="translate(127.46 9) scale(0.84)">
-        <g transform="translate(0 0) rotate(0 22.0 30)"><path d="M3 45 17.5 4 32 45M8 32H27" stroke="#343451" stroke-width="12"/><path d="M3 45 17.5 4 32 45M8 32H27" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(63 0) rotate(0 23.5 30)"><path d="M3 16 11 45 19 25 27 45 35 16" stroke="#343451" stroke-width="12"/><path d="M3 16 11 45 19 25 27 45 35 16" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(110 0) rotate(0 20.0 30)"><path d="M4 30H27C27 11 4 10 4 30C4 48 21 49 27 40" stroke="#343451" stroke-width="12"/><path d="M4 30H27C27 11 4 10 4 30C4 48 21 49 27 40" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(150 0) rotate(0 20.0 30)"><path d="M4 3V44M4 23C16 7 28 16 28 31C28 47 12 51 4 38" stroke="#343451" stroke-width="12"/><path d="M4 3V44M4 23C16 7 28 16 28 31C28 47 12 51 4 38" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(190 0) rotate(0 19.0 30)"><path d="M25 19C17 11 3 15 4 24C5 32 24 29 25 38C26 47 10 50 3 41" stroke="#343451" stroke-width="12"/><path d="M25 19C17 11 3 15 4 24C5 32 24 29 25 38C26 47 10 50 3 41" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(228 0) rotate(0 9.5 30)"><path d="M5 19V45M5 6V6.2" stroke="#343451" stroke-width="12"/><path d="M5 19V45M5 6V6.2" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(247 0) rotate(0 16.5 30)"><path d="M11 4V36Q11 48 22 43M3 18H22" stroke="#343451" stroke-width="12"/><path d="M11 4V36Q11 48 22 43M3 18H22" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(280 0) rotate(0 20.0 30)"><path d="M4 30H27C27 11 4 10 4 30C4 48 21 49 27 40" stroke="#343451" stroke-width="12"/><path d="M4 30H27C27 11 4 10 4 30C4 48 21 49 27 40" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(339 0) rotate(0 9.5 30)"><path d="M5 19V45M5 6V6.2" stroke="#343451" stroke-width="12"/><path d="M5 19V45M5 6V6.2" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        <g transform="translate(358 0) rotate(0 19.0 30)"><path d="M25 19C17 11 3 15 4 24C5 32 24 29 25 38C26 47 10 50 3 41" stroke="#343451" stroke-width="12"/><path d="M25 19C17 11 3 15 4 24C5 32 24 29 25 38C26 47 10 50 3 41" stroke="#c5b5f5" stroke-width="7.5"/></g>
-        </g>
-        <g transform="translate(60.31 76) scale(1.03)">
-        <g transform="translate(0 0) rotate(-3 19.0 30)"><path d="M25 20C14 9 3 19 3 31C3 45 17 51 26 40" stroke="#343451" stroke-width="12"/><path d="M25 20C14 9 3 19 3 31C3 45 17 51 26 40" stroke="#b6a4f3" stroke-width="7.5"/></g>
-        <g transform="translate(38 0) rotate(2 20.5 30)"><path d="M16 15C-1 15-1 46 16 46C34 46 34 15 16 15Z" stroke="#343451" stroke-width="12"/><path d="M16 15C-1 15-1 46 16 46C34 46 34 15 16 15Z" stroke="#ffbfd5" stroke-width="7.5"/></g>
-        <g transform="translate(79 0) rotate(-1 26.0 30)"><path d="M4 45V17M4 25C4 11 21 11 21 26V45M21 26C21 10 39 12 39 27V45" stroke="#343451" stroke-width="12"/><path d="M4 45V17M4 25C4 11 21 11 21 26V45M21 26C21 10 39 12 39 27V45" stroke="#9adbd3" stroke-width="7.5"/></g>
-        <g transform="translate(131 0) rotate(3 9.5 30)"><path d="M5 19V45M5 6V6.2" stroke="#343451" stroke-width="12"/><path d="M5 19V45M5 6V6.2" stroke="#ffe28a" stroke-width="7.5"/></g>
-        <g transform="translate(150 0) rotate(0 20.5 30)"><path d="M4 45V17M4 27C4 10 28 10 28 28V45" stroke="#343451" stroke-width="12"/><path d="M4 45V17M4 27C4 10 28 10 28 28V45" stroke="#a5b9f7" stroke-width="7.5"/></g>
-        <g transform="translate(191 0) rotate(-3 20.5 30)"><path d="M28 22C20 8 3 16 3 30C3 46 20 50 28 36M28 17V45C28 60 12 62 5 53" stroke="#343451" stroke-width="12"/><path d="M28 22C20 8 3 16 3 30C3 46 20 50 28 36M28 17V45C28 60 12 62 5 53" stroke="#b6a4f3" stroke-width="7.5"/></g>
-        <g transform="translate(251 0) rotate(-1 19.0 30)"><path d="M25 19C17 11 3 15 4 24C5 32 24 29 25 38C26 47 10 50 3 41" stroke="#343451" stroke-width="12"/><path d="M25 19C17 11 3 15 4 24C5 32 24 29 25 38C26 47 10 50 3 41" stroke="#9adbd3" stroke-width="7.5"/></g>
-        <g transform="translate(289 0) rotate(3 20.5 30)"><path d="M16 15C-1 15-1 46 16 46C34 46 34 15 16 15Z" stroke="#343451" stroke-width="12"/><path d="M16 15C-1 15-1 46 16 46C34 46 34 15 16 15Z" stroke="#ffe28a" stroke-width="7.5"/></g>
-        <g transform="translate(330 0) rotate(0 20.5 30)"><path d="M16 15C-1 15-1 46 16 46C34 46 34 15 16 15Z" stroke="#343451" stroke-width="12"/><path d="M16 15C-1 15-1 46 16 46C34 46 34 15 16 15Z" stroke="#a5b9f7" stroke-width="7.5"/></g>
-        <g transform="translate(371 0) rotate(-3 20.5 30)"><path d="M4 45V17M4 27C4 10 28 10 28 28V45" stroke="#343451" stroke-width="12"/><path d="M4 45V17M4 27C4 10 28 10 28 28V45" stroke="#b6a4f3" stroke-width="7.5"/></g>
-        <g transform="translate(412 0) rotate(2 21.5 30)"><path d="M4 44V44.2M17 44V44.2M30 44V44.2" stroke="#343451" stroke-width="12"/><path d="M4 44V44.2M17 44V44.2M30 44V44.2" stroke="#ffbfd5" stroke-width="7.5"/></g>
-        </g>
-      </svg>
-    </h1>
-  </main>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Mikhail Grafov</h1>
+    <p class="title">Infrastructure &amp; security engineer · Founder of Traiecto</p>
+    <p class="summary">Engineering leader from high-load payment and banking infrastructure, information security and systems software. Now building Traiecto, a resilience control plane that keeps rollouts, failover and recovery correct across multiple clusters when infrastructure state is delayed or incomplete.</p>
+    <p class="loc">Belgrade, Serbia</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="mailto:m.grafov2004@outlook.com">Email</a>
+      <a class="btn btn-ghost" href="cv-mikhail-grafov.pdf" download>CV (PDF)</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section id="traiecto" aria-labelledby="h-traiecto">
+    <div class="wrap">
+      <h2 id="h-traiecto">Traiecto</h2>
+      <p class="lead">A resilience control plane for organisations that run critical applications across several data centres or clouds.</p>
+
+      <h3>The problem</h3>
+      <p>Existing orchestration tools act on the last state they observed. In multi-cluster environments that state is often stale: reports arrive late, sites are partitioned, backups are restored, controllers restart. Automation acting on stale state turns a fault into an outage: evicting the last healthy replicas, treating an empty endpoint list as truth, rolling out to two regions at once. Under DORA (finance, in force since January 2025) and NIS2 (critical infrastructure), such outages are regulatory events, not just incidents.</p>
+
+      <h3>The approach</h3>
+      <p>The operator declares the desired state; Traiecto continuously reconciles it with reality and treats uncertainty as a first-class part of the control loop.</p>
+      <ul class="mech">
+        <li><strong>Version-bound lifecycle states</strong><span>Accepted, allocated, running, ready and serving are tracked separately. Readiness counts only when tied to the exact configuration version and a fresh node session.</span></li>
+        <li><strong>Stale-report protection</strong><span>Node sessions carry epochs and strictly increasing sequence numbers, so late, replayed or out-of-order reports cannot overwrite newer facts.</span></li>
+        <li><strong>Fleet-wide disruption budget</strong><span>One availability budget across all clusters, split into exact per-cluster portions. An unreachable cluster counts as unavailable: the system fails closed.</span></li>
+        <li><strong>Fail-safe service discovery</strong><span>A sudden mass &ldquo;not ready&rdquo; signal is treated as suspect: the last good endpoint set is kept and marked degraded instead of wiping a working service.</span></li>
+      </ul>
+
+      <h3>Evidence today</h3>
+      <p class="muted">A working prototype on the founder's own platform, written in C++ with gRPC and Protobuf.</p>
+      <ul class="facts">
+        <li>Working multi-node stand: <span class="num">3</span> control-plane replicas and <span class="num">5</span> node agents.</li>
+        <li><span class="num">2-hour</span> fault-injection rehearsals on that stand, each with about <span class="num">116</span> injected faults: process kills, network partitions, storage pause and restore, disk exhaustion.</li>
+        <li>Automated invariant checks; violations per run reduced from <span class="num">686</span> to <span class="num">0–1</span> over successive iterations.</li>
+        <li>About <span class="num">5,400</span> automated tests and <span class="num">18</span> fuzz targets; CI gated by ASan, UBSan and TSan sanitizers.</li>
+      </ul>
+      <p class="note"><strong>Next milestones.</strong> The 6-hour soak and the multi-cluster soak are not yet green; they are the next milestones. There are no customers yet.</p>
+
+      <h3>Roadmap</h3>
+      <p>Kubernetes interoperability, then sovereign AI inference (customers' own models on their own or EU-sovereign GPU capacity) on the same core.</p>
+      <p><strong>Live demo under NDA on request</strong> — <a href="mailto:m.grafov2004@outlook.com?subject=Traiecto%20demo">m.grafov2004@outlook.com</a>.</p>
+    </div>
+  </section>
+
+  <section id="experience" aria-labelledby="h-exp">
+    <div class="wrap">
+      <h2 id="h-exp">Experience</h2>
+      <ol class="timeline" reversed>
+        <li><span class="when">2026 –</span><div><span class="role">Founder &amp; sole engineer</span> · <span class="org">Traiecto</span><p class="desc">Designed and built a declarative multi-cluster orchestration platform and its fault-injection soak harness.</p></div></li>
+        <li><span class="when">2024 –</span><div><span class="role">Chief Technology Officer</span> · <span class="org">ARBUZ</span><p class="desc">Cross-border remittance app; lead technology and engineering for the product.</p></div></li>
+        <li><span class="when">2023</span><div><span class="role">Lead Developer / Tech Lead</span> · <span class="org">Deltatechservice LLC</span><p class="desc">Led development of algorithms for hardware-software information-security systems.</p></div></li>
+        <li><span class="when">2022</span><div><span class="role">Head of IT Infrastructure / Chief Technical Officer</span> · <span class="org">AKIB Pochtobank JSC</span><p class="desc">Responsible for the bank's IT infrastructure: availability, security and infrastructure operations.</p></div></li>
+        <li><span class="when">2020</span><div><span class="role">Senior Engineer, Payment Processing Systems Design</span> · <span class="org">Forbank JSC</span><p class="desc">Designed high-load payment transaction processing systems.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="research" aria-labelledby="h-research">
+    <div class="wrap">
+      <h2 id="h-research">Research</h2>
+      <div class="cite">
+        <p>Grafov M.D. <cite>Hybrid Cloud Solutions for Processing High-Load Financial Systems.</cite> Industrial Automated Control Systems and Controllers, 2025, No.&nbsp;11, pp.&nbsp;24–32. DOI&nbsp;<a href="https://doi.org/10.25791/asu.11.2025.1623">10.25791/asu.11.2025.1623</a>. Sole author, peer-reviewed.</p>
+        <p class="muted">The paper models hybrid public/private cloud architectures for high-load transaction processing in a simulation at 20,000 TPS under combined DDoS attacks, assessing performance, resilience and security under variable load. It derives recommendations on Zero Trust, micro-segmentation, automated incident response and DevSecOps. Traiecto is the engineering continuation of this work.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" aria-labelledby="h-edu">
+    <div class="wrap">
+      <h2 id="h-edu">Education</h2>
+      <p class="muted">Ivanovo State University of Chemistry and Technology</p>
+      <ul>
+        <li><strong>Master's programme</strong> (final year)</li>
+        <li><strong>BSc Information Systems and Technologies</strong> (09.03.02)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="h-skills">
+    <div class="wrap">
+      <h2 id="h-skills">Areas</h2>
+      <ul class="tags">
+        <li>Distributed systems &amp; control planes</li>
+        <li>High-load transaction processing</li>
+        <li>Fault injection &amp; resilience</li>
+        <li>Zero Trust &amp; security engineering</li>
+        <li>C++ · gRPC · Protobuf</li>
+        <li>DORA / NIS2 (working knowledge)</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p><a href="mailto:m.grafov2004@outlook.com">m.grafov2004@outlook.com</a> · <a href="cv-mikhail-grafov.pdf" download>CV (PDF)</a></p>
+    <p>Belgrade, Serbia</p>
+    <p class="copy">© 2026 Mikhail Grafov</p>
+  </div>
+</footer>
 </body>
 </html>
